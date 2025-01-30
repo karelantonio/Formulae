@@ -35,12 +35,13 @@ fun ThemePickerPreview() {
 fun ThemePicker(ctl: NavHostController, selected: Theme?, onSelected: (Theme) -> Unit) {
     Dialog(onDismissRequest = { ctl.popBackStack() }) {
         Card {
-            Column(modifier = Modifier.padding(24.dp, 12.dp)) {
+            Column(modifier = Modifier.padding(24.dp)) {
 
                 Text(
                     text = "Select the theme:",
-                    modifier = Modifier.padding(0.dp, 6.dp),
-                    style = MaterialTheme.typography.titleMedium
+                    modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 16.dp),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.headlineSmall
                 )
 
                 val themes: List<Pair<String, Theme>> = listOf(

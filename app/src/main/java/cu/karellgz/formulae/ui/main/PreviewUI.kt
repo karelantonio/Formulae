@@ -2,6 +2,7 @@ package cu.karellgz.formulae.ui.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +22,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -37,7 +39,7 @@ import java.io.File
 
 
 @Composable
-@Preview(name = "Preview the preview lol", showBackground = true)
+@Preview(name = "Preview the preview lol", showBackground = true, showSystemUi = true)
 fun PreviewPreview() {
     FormulaeTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
@@ -69,37 +71,15 @@ fun PreviewUI(
     ) {
         Card(
             modifier = Modifier
-                .padding(8.dp, 24.dp)
                 .fillMaxWidth()
-                .verticalScroll(scroll)
         ) {
 
-            // The webview
-            Surface {
-                LaTeX(
-                    formula = value,
-                    save = saveClicked.value,
-                    onError = { error.value = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    theme = theme,
-                    onSaved = {
-                        saveClicked.value = false
-                        val uri = FileProvider.getUriForFile(
-                            ctx,
-                            "${ctx.packageName}.fileprovider",
-                            File(it)
-                        )
-
-                        // The intent
-                        val share = Intent(Intent.ACTION_SEND)
-                        share.type = "image/png"
-                        share.putExtra(Intent.EXTRA_STREAM, uri)
-                        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                        ctx.startActivity(Intent.createChooser(share, "Share with..."))
-                    }
-                )
-            }
-
+            Text(
+                "Preview Formula",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(24.dp, 24.dp, 24.dp, 16.dp)
+            )
 
             if (error.value != null || isPreview) {
                 Text(
@@ -109,33 +89,51 @@ fun PreviewUI(
                         .padding(8.dp),
                     style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
                 )
+            } else {
+
+                // The webview
+                Surface {
+                    LaTeX(
+                        formula = value,
+                        save = saveClicked.value,
+                        onError = { error.value = it },
+                        modifier = Modifier.fillMaxWidth(),
+                        theme = theme,
+                        onSaved = {
+                            saveClicked.value = false
+                            val uri = FileProvider.getUriForFile(
+                                ctx,
+                                "${ctx.packageName}.fileprovider",
+                                File(it)
+                            )
+
+                            // The intent
+                            val share = Intent(Intent.ACTION_SEND)
+                            share.type = "image/png"
+                            share.putExtra(Intent.EXTRA_STREAM, uri)
+                            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            ctx.startActivity(Intent.createChooser(share, "Share with..."))
+                        }
+                    )
+                }
             }
 
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp, 0.dp)
+                    .padding(24.dp, 16.dp, 24.dp, 24.dp)
             ) {
 
-                TextButton(onClick = { saveClicked.value = true }) {
-                    Icon(
-                        modifier = Modifier.padding(4.dp),
-                        imageVector = Icons.TwoTone.Share,
-                        contentDescription = "Share"
-                    )
-                    Text("Share")
-                }
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                TextButton(onClick = { ctl.navigate("themePicker") }) {
+                TextButton(onClick = { saveClicked.value = true }) {
                     Icon(
-                        modifier = Modifier.padding(4.dp),
-                        imageVector = Icons.TwoTone.Create,
-                        contentDescription = "Theme"
+                        imageVector = Icons.TwoTone.Share,
+                        contentDescription = "Share",
                     )
-                    Text("Theme")
+                    Text("Share")
                 }
             }
         }
