@@ -43,7 +43,9 @@ fun EditorUI(ctl: NavHostController, value: String, onChange: (String) -> Unit) 
         TextField(
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent
+                unfocusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
             ),
             textStyle = TextStyle.Default.copy(fontFamily = FontFamily.Monospace),
             value = value,

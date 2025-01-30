@@ -2,8 +2,11 @@ package cu.karellgz.formulae.ui
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -105,12 +108,13 @@ fun AppBar(ctl: NavController) {
             titleContentColor = MaterialTheme.colorScheme.primary,
         ), title = {
 
-            Row {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     painter = painterResource(id = R.drawable.equation),
                     modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .padding(8.dp),
+                        .padding(0.dp, 0.dp, 6.dp, 0.dp)
+                        .width(24.dp)
+                        .height(24.dp),
                     contentDescription = "Euler raised to the power of I times Pi"
                 )
 
