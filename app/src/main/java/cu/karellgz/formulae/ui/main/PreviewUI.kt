@@ -72,6 +72,7 @@ fun PreviewUI(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
+                .verticalScroll(scroll)
         ) {
 
             Text(
