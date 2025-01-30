@@ -1,5 +1,7 @@
 package cu.karellgz.formulae.ui
 
+import android.content.Context
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -19,14 +21,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,6 +45,7 @@ import cu.karellgz.formulae.ui.main.AboutUI
 import cu.karellgz.formulae.ui.main.EditorUI
 import cu.karellgz.formulae.ui.main.MoreOptionsUI
 import cu.karellgz.formulae.ui.main.PreviewUI
+import cu.karellgz.formulae.ui.main.SelectedTheme
 import cu.karellgz.formulae.ui.main.ThemePicker
 import cu.karellgz.formulae.ui.theme.FormulaeTheme
 import cu.karellgz.formulae.utils.Theme
@@ -49,9 +58,40 @@ fun MainUI() {
 
         val ctl = rememberNavController()
         val content = rememberSaveable { mutableStateOf("") }
-        val theme = rememberSaveable(
-            saver = mutableStateThemeSaver,
-            init = { mutableStateOf(Theme.BLACK_ON_WHITE) })
+        val ctx = LocalContext.current
+        val isDark = isSystemInDarkTheme()
+        val selectedTheme = remember {
+            val prefs = ctx.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+            val theme = prefs.getString("theme", null) ?: "auto"
+            mutableStateOf(
+                when (theme) {
+                    "auto" -> {
+                        SelectedTheme.Auto
+                    }
+
+                    "light" -> {
+                        SelectedTheme.Light
+                    }
+
+                    else -> {
+                        SelectedTheme.Dark
+                    }
+                }
+            )
+        }
+        val theme = remember {
+            if (selectedTheme.value == SelectedTheme.Auto) {
+                if (isDark) {
+                    Theme.WHITE_ON_BLACK
+                } else {
+                    Theme.BLACK_ON_WHITE
+                }
+            } else if (selectedTheme.value == SelectedTheme.Light) {
+                Theme.BLACK_ON_WHITE
+            } else {
+                Theme.WHITE_ON_BLACK
+            }
+        }
 
         Scaffold(
             topBar = { AppBar(ctl) },
@@ -73,13 +113,27 @@ fun MainUI() {
                 }
 
                 dialog("themePicker") {
-                    ThemePicker(ctl, theme.value, onSelected = { thm ->
-                        theme.value = thm
+                    ThemePicker(ctl, selectedTheme.value, onSelected = { thm ->
+                        // Save the theme and change
+                        ctx.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().apply {
+                            putString(
+                                "theme", if (thm == SelectedTheme.Auto) {
+                                    "auto"
+                                } else if (thm == SelectedTheme.Light) {
+                                    "light"
+                                } else {
+                                    "dark"
+                                }
+                            )
+                            commit()
+                        }
+
+                        selectedTheme.value = thm
                     })
                 }
 
                 dialog("preview") {
-                    PreviewUI(ctl, value = content.value, theme = theme.value)
+                    PreviewUI(ctl, value = content.value, theme = theme)
                 }
 
                 dialog("moreOptions") {
