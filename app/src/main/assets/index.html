@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="katex.min.css">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script src="katex.min.js"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <title>Preview</title>
+</head>
+<body style="
+background-color:transparent;
+display: flex;
+align-items: center;
+justify-content: center;
+color: black;
+">
+
+<p id="ident"></p>
+
+<script>
+    // Load the base64-encoded tex formula
+    // bg: the background color (css) of the page
+    // fore: the foreground color
+    function loadEncoded(encoded, bg, fore) {
+
+        // Set the bg color if specified
+        if(bg){
+            document.body.style["background-color"] = bg;
+        }
+
+        // Set the foreground color if specified
+        if(fore){
+            document.body.style["color"] = fore;
+        }
+
+        decoded = atob(encoded);
+        katex.render(decoded, document.getElementById('ident'), {
+            throwOnError: true
+        });
+    }
+</script>
+</body>
+</html>
+
