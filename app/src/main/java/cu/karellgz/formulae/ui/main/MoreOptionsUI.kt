@@ -12,11 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import cu.karellgz.formulae.BuildConfig
 import cu.karellgz.formulae.R
 import cu.karellgz.formulae.ui.theme.FormulaeTheme
 
@@ -55,6 +57,27 @@ fun MoreOptionsUI(ctl: NavController) {
 
                     Text("Choose the preview theme")
                 }
+
+                TextButton(onClick = {
+                    // Launch the telegram site
+                }) {
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_menu_book_24),
+                        contentDescription = "Tutorial and more"
+                    )
+
+                    Text("Tutorials and more")
+                }
+
+                Text(
+                    text = "Formulae ${BuildConfig.VERSION_NAME} (commit ${
+                        BuildConfig.COMMIT.substring(
+                            0..10
+                        )
+                    })",
+                    modifier = Modifier.padding(0.dp, 24.dp, 0.dp, 0.dp)
+                )
             }
         }
     }

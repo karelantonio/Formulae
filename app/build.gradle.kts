@@ -18,6 +18,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "COMMIT", '"' + system("bash", "-c", "git log -1 | head -n1 | awk '{print \$2}'") + '"')
+        buildConfigField("String", "BRANCH", '"' + system("bash", "-c", "git branch | awk '{print \$2}'") + '"')
     }
 
     buildTypes {
@@ -38,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -75,4 +79,14 @@ dependencies {
     implementation(libs.androidx.navigation.runtime)
 
     //implementation(libs.accompanist.webview)
+}
+
+/**
+ * Execute the given command and get the output
+ */
+fun system(vararg cmd: String): String {
+    return ProcessBuilder().apply {
+        command(cmd.toList())
+        redirectOutput(ProcessBuilder.Redirect.PIPE)
+    }.start().inputStream.bufferedReader().readLines().joinToString("\n")
 }
