@@ -104,5 +104,27 @@ fun ThemePicker(
 enum class SelectedTheme {
     Light,
     Dark,
-    Auto,
+    Auto;
+
+    fun toTheme(isDark: Boolean): Theme {
+        return if (this == Light) {
+            Theme.BLACK_ON_WHITE
+        } else if (this == Dark) {
+            Theme.WHITE_ON_BLACK
+        } else if (isDark) {
+            Theme.WHITE_ON_BLACK
+        } else {
+            Theme.BLACK_ON_WHITE
+        }
+    }
+
+    fun toShortForm(): String {
+        return if (this == Light) {
+            "light"
+        } else if (this == Dark) {
+            "dark"
+        } else {
+            "auto"
+        }
+    }
 }

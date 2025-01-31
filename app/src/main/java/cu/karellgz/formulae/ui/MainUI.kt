@@ -80,17 +80,19 @@ fun MainUI() {
             )
         }
         val theme = remember {
-            if (selectedTheme.value == SelectedTheme.Auto) {
-                if (isDark) {
-                    Theme.WHITE_ON_BLACK
-                } else {
+            mutableStateOf(
+                if (selectedTheme.value == SelectedTheme.Auto) {
+                    if (isDark) {
+                        Theme.WHITE_ON_BLACK
+                    } else {
+                        Theme.BLACK_ON_WHITE
+                    }
+                } else if (selectedTheme.value == SelectedTheme.Light) {
                     Theme.BLACK_ON_WHITE
+                } else {
+                    Theme.WHITE_ON_BLACK
                 }
-            } else if (selectedTheme.value == SelectedTheme.Light) {
-                Theme.BLACK_ON_WHITE
-            } else {
-                Theme.WHITE_ON_BLACK
-            }
+            )
         }
 
         Scaffold(
@@ -116,24 +118,17 @@ fun MainUI() {
                     ThemePicker(ctl, selectedTheme.value, onSelected = { thm ->
                         // Save the theme and change
                         ctx.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().apply {
-                            putString(
-                                "theme", if (thm == SelectedTheme.Auto) {
-                                    "auto"
-                                } else if (thm == SelectedTheme.Light) {
-                                    "light"
-                                } else {
-                                    "dark"
-                                }
-                            )
+                            putString("theme", thm.toShortForm())
                             commit()
                         }
 
                         selectedTheme.value = thm
+                        theme.value = thm.toTheme(isDark)
                     })
                 }
 
                 dialog("preview") {
-                    PreviewUI(ctl, value = content.value, theme = theme)
+                    PreviewUI(ctl, value = content.value, theme = theme.value)
                 }
 
                 dialog("moreOptions") {
