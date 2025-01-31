@@ -1,5 +1,7 @@
 package cu.karellgz.formulae.ui.main
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -36,6 +38,9 @@ fun MoreOptionsPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoreOptionsUI(ctl: NavController) {
+
+    val ctx = LocalContext.current
+
     AlertDialog(onDismissRequest = { ctl.popBackStack() }) {
         Card {
             Column(modifier = Modifier.padding(24.dp)) {
@@ -60,6 +65,9 @@ fun MoreOptionsUI(ctl: NavController) {
 
                 TextButton(onClick = {
                     // Launch the telegram site
+                    val intent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/formulae_app_es"))
+                    ctx.startActivity(Intent.createChooser(intent, "Choose an app"))
                 }) {
 
                     Icon(
