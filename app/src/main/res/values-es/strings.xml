@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Formulae</string>
+    <string name="editorui_placeholder">Escribe aquí tu fórmula</string>
+    <string name="moreoptionui_header_more_opts">Más opciones</string>
+    <string name="moreoptionsui_choosetheme_contentdesc">Selecciona el tema de la previsualización</string>
+    <string name="moreoptionsui_choosetheme">Selecciona el tema de la previsualización</string>
+    <string name="moreoptionsui_choose_an_app">Choose an app</string>
+    <string name="moreoptionsui_tutorials_and_more_contentdesc">Tutoriales y más</string>
+    <string name="moreoptionsui_tutorials_and_more">Tutoriales y más</string>
+    <string name="previewui_header">Resultado</string>
+    <string name="previewui_share_with">Compartir con...</string>
+    <string name="previewui_share_contentdesc">Compartir</string>
+    <string name="previewui_share">Compartir</string>
+    <string name="themepickerui_header">Selecciona el tema</string>
+    <string name="themepickerui_white_on_black_background">Claro en fondo oscuro</string>
+    <string name="themepickerui_black_on_white_background">Oscuro en fondo claro</string>
+    <string name="mainui_more_options_contentdesc">Mas opciones</string>
+    <string name="themepickerui_system_default">Seguir la configuración del sistema</string>
+    <string name="mainui_preview_btn">Ver</string>
 </resources>

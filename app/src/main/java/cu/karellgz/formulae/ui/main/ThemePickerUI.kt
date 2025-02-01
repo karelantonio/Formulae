@@ -14,11 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import cu.karellgz.formulae.R
 import cu.karellgz.formulae.ui.theme.FormulaeTheme
 import cu.karellgz.formulae.utils.Theme
 
@@ -44,7 +46,7 @@ fun ThemePicker(
             Column(modifier = Modifier.padding(24.dp)) {
 
                 Text(
-                    text = "Select the theme",
+                    text = stringResource(R.string.themepickerui_header),
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 16.dp),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.headlineSmall
@@ -52,14 +54,14 @@ fun ThemePicker(
 
                 val themes: List<Pair<String, Pair<Theme?, SelectedTheme>>> = listOf(
                     Pair(
-                        "White on black background",
+                        stringResource(R.string.themepickerui_white_on_black_background),
                         Pair(Theme.WHITE_ON_BLACK, SelectedTheme.Dark)
                     ),
                     Pair(
-                        "Black on white background",
+                        stringResource(R.string.themepickerui_black_on_white_background),
                         Pair(Theme.BLACK_ON_WHITE, SelectedTheme.Light)
                     ),
-                    Pair("System default", Pair(null, SelectedTheme.Auto))
+                    Pair(stringResource(R.string.themepickerui_system_default), Pair(null, SelectedTheme.Auto))
                 )
 
                 for (pr in themes) {

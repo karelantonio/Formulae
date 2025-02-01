@@ -13,12 +13,14 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import cu.karellgz.formulae.R
 import cu.karellgz.formulae.ui.theme.FormulaeTheme
 
 
@@ -50,7 +52,7 @@ fun EditorUI(ctl: NavHostController, value: String, onChange: (String) -> Unit) 
             textStyle = TextStyle.Default.copy(fontFamily = FontFamily.Monospace),
             value = value,
             placeholder = {
-                Text("Your formula goes here", fontFamily = FontFamily.Monospace)
+                Text(stringResource(R.string.editorui_placeholder), fontFamily = FontFamily.Monospace)
             },
             onValueChange = onChange,
             modifier = Modifier

@@ -26,12 +26,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.core.content.FileProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import cu.karellgz.formulae.R
 import cu.karellgz.formulae.latex.LaTeX
 import cu.karellgz.formulae.ui.theme.FormulaeTheme
 import cu.karellgz.formulae.utils.Theme
@@ -76,7 +78,7 @@ fun PreviewUI(
         ) {
 
             Text(
-                "Preview Formula",
+                stringResource(R.string.previewui_header),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(24.dp, 24.dp, 24.dp, 16.dp)
@@ -113,7 +115,8 @@ fun PreviewUI(
                             share.type = "image/png"
                             share.putExtra(Intent.EXTRA_STREAM, uri)
                             share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                            ctx.startActivity(Intent.createChooser(share, "Share with..."))
+                            ctx.startActivity(Intent.createChooser(share,
+                                ctx.getString(R.string.previewui_share_with)))
                         }
                     )
                 }
@@ -132,9 +135,9 @@ fun PreviewUI(
                 TextButton(onClick = { saveClicked.value = true }) {
                     Icon(
                         imageVector = Icons.TwoTone.Share,
-                        contentDescription = "Share",
+                        contentDescription = stringResource(R.string.previewui_share_contentdesc),
                     )
-                    Text("Share")
+                    Text(stringResource(R.string.previewui_share))
                 }
             }
         }

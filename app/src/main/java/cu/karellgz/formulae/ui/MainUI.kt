@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.MoreVert
@@ -21,9 +20,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -31,10 +27,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -49,7 +45,6 @@ import cu.karellgz.formulae.ui.main.SelectedTheme
 import cu.karellgz.formulae.ui.main.ThemePicker
 import cu.karellgz.formulae.ui.theme.FormulaeTheme
 import cu.karellgz.formulae.utils.Theme
-import cu.karellgz.formulae.utils.mutableStateThemeSaver
 
 @Composable
 @Preview(name = "Main UI preview")
@@ -149,7 +144,7 @@ fun AppBar(ctl: NavController) {
     CenterAlignedTopAppBar(
         navigationIcon = {
             IconButton(onClick = { ctl.navigate("moreOptions") }) {
-                Icon(imageVector = Icons.TwoTone.MoreVert, contentDescription = "More options")
+                Icon(imageVector = Icons.TwoTone.MoreVert, contentDescription = stringResource(R.string.mainui_more_options_contentdesc))
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -164,7 +159,7 @@ fun AppBar(ctl: NavController) {
                         .padding(0.dp, 0.dp, 6.dp, 0.dp)
                         .width(24.dp)
                         .height(24.dp),
-                    contentDescription = "Euler raised to the power of I times Pi"
+                    contentDescription = "Editor"
                 )
 
                 Text(
@@ -176,7 +171,7 @@ fun AppBar(ctl: NavController) {
         },
         actions = {
             ElevatedButton(onClick = { ctl.navigate("preview") }) {
-                Text("Preview")
+                Text(stringResource(R.string.mainui_preview_btn))
             }
         }
     )

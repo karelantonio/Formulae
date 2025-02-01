@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name" translatable="false">Formulae</string>
+    <string name="editorui_placeholder">Your formula goes here</string>
+    <string name="moreoptionui_header_more_opts">More options</string>
+    <string name="moreoptionsui_choosetheme_contentdesc">Choose the preview theme</string>
+    <string name="moreoptionsui_choosetheme">Choose the preview theme</string>
+    <string name="moreoptionsui_choose_an_app">Choose an app</string>
+    <string name="moreoptionsui_tutorials_and_more_contentdesc">Tutorials and more</string>
+    <string name="moreoptionsui_tutorials_and_more">Tutorials and more</string>
+    <string name="previewui_header">Result</string>
+    <string name="previewui_share_with">Share with...</string>
+    <string name="previewui_share_contentdesc">Share</string>
+    <string name="previewui_share">Share</string>
+    <string name="themepickerui_header">Select the theme</string>
+    <string name="themepickerui_white_on_black_background">White on black background</string>
+    <string name="themepickerui_black_on_white_background">Black on white background</string>
+    <string name="mainui_more_options_contentdesc">More options</string>
+    <string name="themepickerui_system_default">System default</string>
+    <string name="mainui_preview_btn">Preview</string>
 </resources>

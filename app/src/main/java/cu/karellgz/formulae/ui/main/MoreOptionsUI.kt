@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -45,7 +46,7 @@ fun MoreOptionsUI(ctl: NavController) {
         Card {
             Column(modifier = Modifier.padding(24.dp)) {
                 Text(
-                    "More options",
+                    stringResource(R.string.moreoptionui_header_more_opts),
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 16.dp)
@@ -57,25 +58,26 @@ fun MoreOptionsUI(ctl: NavController) {
 
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_dark_mode_24),
-                        contentDescription = "Choose the preview theme"
+                        contentDescription = stringResource(R.string.moreoptionsui_choosetheme_contentdesc)
                     )
 
-                    Text("Choose the preview theme")
+                    Text(stringResource(R.string.moreoptionsui_choosetheme))
                 }
 
                 TextButton(onClick = {
                     // Launch the telegram site
                     val intent =
                         Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/formulae_app_es"))
-                    ctx.startActivity(Intent.createChooser(intent, "Choose an app"))
+                    ctx.startActivity(Intent.createChooser(intent,
+                        ctx.getString(R.string.moreoptionsui_choose_an_app)))
                 }) {
 
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_menu_book_24),
-                        contentDescription = "Tutorial and more"
+                        contentDescription = stringResource(R.string.moreoptionsui_tutorials_and_more_contentdesc)
                     )
 
-                    Text("Tutorials and more")
+                    Text(stringResource(R.string.moreoptionsui_tutorials_and_more))
                 }
 
                 Text(
