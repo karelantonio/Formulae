@@ -17,4 +17,5 @@
     <string name="mainui_more_options_contentdesc">More options</string>
     <string name="themepickerui_system_default">System default</string>
     <string name="mainui_preview_btn">Preview</string>
+    <string name="previewui_nothing2show">Nothing to show!</string>
 </resources>

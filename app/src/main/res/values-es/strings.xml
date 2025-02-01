@@ -17,4 +17,5 @@
     <string name="mainui_more_options_contentdesc">Mas opciones</string>
     <string name="themepickerui_system_default">Seguir la configuración del sistema</string>
     <string name="mainui_preview_btn">Ver</string>
+    <string name="previewui_nothing2show">No hay nada que mostrar!</string>
 </resources>

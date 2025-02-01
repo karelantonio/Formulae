@@ -92,6 +92,16 @@ fun PreviewUI(
                         .padding(8.dp),
                     style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
                 )
+            } else if (value.trim().isEmpty()) {
+
+                Text(
+                    stringResource(R.string.previewui_nothing2show),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
+                )
+
             } else {
 
                 // The webview
@@ -115,8 +125,12 @@ fun PreviewUI(
                             share.type = "image/png"
                             share.putExtra(Intent.EXTRA_STREAM, uri)
                             share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                            ctx.startActivity(Intent.createChooser(share,
-                                ctx.getString(R.string.previewui_share_with)))
+                            ctx.startActivity(
+                                Intent.createChooser(
+                                    share,
+                                    ctx.getString(R.string.previewui_share_with)
+                                )
+                            )
                         }
                     )
                 }
