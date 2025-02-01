@@ -1,5 +1,7 @@
 # Formulae App
 
+![app icon](app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp)
+
 An extremely simple app to write and share formulas, with zero permissions.
 
 We have a two well-defined concepts in this project:
