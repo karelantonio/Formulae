@@ -9,9 +9,6 @@ We have a two well-defined concepts in this project:
 * Simple: the design may be ugly, but the idea is simple, write formulas and get images back (and possibly share)
 * Should avoid third party dependencies: only the required androidx dependencies are used
 * No ADS: no explanation needed, we all hate ads
-* 
-
-Also, no ads
 
 ## License
 
